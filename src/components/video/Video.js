@@ -21,7 +21,10 @@ const Video = () => {
         <span>5 days ago</span>
       </div>
       <div className="video_channel">
-        <img src="" alt="" />
+        <img
+          src="//yt3.ggpht.com/ytc/AAUvwniwccxGvXvGzzwka5f73aPbmdxvEX4G_cUd7TEzkw=s48-c-k-c0x00ffffff-no-rj-mo"
+          alt=""
+        />
         <p>Rainbow Hat Jr</p>
       </div>
     </div>

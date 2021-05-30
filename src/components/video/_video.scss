@@ -30,6 +30,8 @@
   &_title {
     margin-bottom: 0.1rem;
     color: #fff;
+
+    @include line-clamp(1);
   }
   &_details {
     display: flex;
