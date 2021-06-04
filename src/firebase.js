@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 
+import "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyAJ-bVAOqmRTiPwhrnV9xD7YYTOIHS7f5s",
   authDomain: "yt-clone-avinash.firebaseapp.com",
@@ -10,3 +12,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+export default firebase.auth();

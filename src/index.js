@@ -7,11 +7,15 @@ import store from "./redux/store";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { BrowserRouter as Router } from "react-router-dom";
+
 import "./_base.scss";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
