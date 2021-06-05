@@ -11,6 +11,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import "./_base.scss";
 
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
