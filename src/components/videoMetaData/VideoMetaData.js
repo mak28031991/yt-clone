@@ -1,28 +1,50 @@
 import moment from "moment";
 import numeral from "numeral";
-import React from "react";
+import React, { useEffect } from "react";
 import "./_videoMetaData.scss";
 
 import { MdThumbUp, MdThumbDown } from "react-icons/md";
 import ShowMoreText from "react-show-more-text";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getChannelDetails,
+  checkSubscriptionStatus,
+} from "../../redux/actions/channel.action";
 
-const VideoMetaData = () => {
+const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
+  const { channelId, channelTitle, description, title, publishedAt } = snippet;
+  const { viewCount, likeCount, dislikeCount } = statistics;
+
+  const dispatch = useDispatch();
+
+  const { snippet: channelSnippet, statistics: channelStatistics } =
+    useSelector((state) => state.channelDetails.channel);
+
+  const subscriptionStatus = useSelector(
+    (state) => state.channelDetails.subscriptionStatus
+  );
+
+  useEffect(() => {
+    dispatch(getChannelDetails(channelId));
+    dispatch(checkSubscriptionStatus(channelId));
+  }, [dispatch, channelId]);
+
   return (
     <div className="videoMetaData py-2">
       <div className="videoMetaData_top">
-        <h5>Video Title</h5>
+        <h5>{title}</h5>
         <div className="d-flex justify-content-between align-items-center py-1">
           <span>
-            {numeral(100000).format("0.a")}Views •
-            {moment("2020-05-6").fromNow()}
+            {numeral(viewCount).format("0.a")} Views •
+            {moment(publishedAt).fromNow()}
           </span>
 
           <div>
             <span className="mr-3">
-              <MdThumbUp size={26} /> {numeral(100000).format("0.a")}
+              <MdThumbUp size={26} /> {numeral(likeCount).format("0.a")}
             </span>
             <span className="mr-3">
-              <MdThumbDown size={26} /> {numeral(100000).format("0.a")}
+              <MdThumbDown size={26} /> {numeral(dislikeCount).format("0.a")}
             </span>
           </div>
         </div>
@@ -31,16 +53,23 @@ const VideoMetaData = () => {
       <div className="videoMetaData_channel d-flex justify-content-between align-items-center my-2 py-3">
         <div className="d-flex">
           <img
-            src="https://www.seoclerk.com/pics/319222-1IvI0s1421931178.png"
+            src={channelSnippet?.thumbnails?.default?.url}
             alt=""
             className="rounded-circle mr-3"
           />
           <div className="d-flex flex-column">
-            <span>Backbench Coder</span>
-            <span>{numeral(100000).format("0.a")} Subscribers</span>
+            <span>{channelTitle}</span>
+            <span>
+              {numeral(channelStatistics?.subscriberCount).format("0.a")}{" "}
+              Subscribers
+            </span>
           </div>
         </div>
-        <button className="btn border-0 p-2 m-2">Subscribe </button>
+        <button
+          className={`btn border-0 p-2 m-2 ${subscriptionStatus && "btn-grey"}`}
+        >
+          {subscriptionStatus ? "Subscribed" : "Subscribe"}{" "}
+        </button>
       </div>
       <div className="videoMetaData_description">
         <ShowMoreText
@@ -50,15 +79,7 @@ const VideoMetaData = () => {
           anchorClass="showMoreText"
           expanded={false}
         >
-          quae tempora cum placeat, veniam fuga voluptatum ducimus, error quis
-          tempore alias! Nostrum accusantium blanditiis eaque placeat
-          reprehenderit recusandae et expedita ab amet excepturi ullam voluptas,
-          quaerat ad sed, tempore labore corrupti! Quia unde aliquid reiciendis
-          deleniti numquam! Placeat dolores animi totam facilis vel voluptatum,
-          accusamus tempore natus exercitationem officia. Repudiandae Quia unde
-          aliquid reiciendis deleniti numquam! Placeat dolores animi totam
-          facilis vel voluptatum, accusamus tempore natus exercitationem
-          officia. Repudiandae .
+          {description}
         </ShowMoreText>
       </div>
     </div>
