@@ -3,12 +3,12 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAJ-bVAOqmRTiPwhrnV9xD7YYTOIHS7f5s",
-  authDomain: "yt-clone-avinash.firebaseapp.com",
-  projectId: "yt-clone-avinash",
-  storageBucket: "yt-clone-avinash.appspot.com",
-  messagingSenderId: "73745248181",
-  appId: "1:73745248181:web:bab67e1ee21ec4d36873fc",
+  apiKey: "AIzaSyCXwiqPJhJCwzpIw_02YlXWysUMb0i6A7I",
+  authDomain: "yt-clone-avinash-a37c6.firebaseapp.com",
+  projectId: "yt-clone-avinash-a37c6",
+  storageBucket: "yt-clone-avinash-a37c6.appspot.com",
+  messagingSenderId: "1018971132223",
+  appId: "1:1018971132223:web:4074a9c766f087ab29c38a"
 };
 
 firebase.initializeApp(firebaseConfig);
